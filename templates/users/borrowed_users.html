@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if perms.catalog.can_see_borrower %}
+  <h1>Borrowed Users</h1>
+    {% if bookinstance_list %}
+      {% for borrow_user in bookinstance_list %}
+        <li><a href="#">{{ borrow_user.borrower }}</a></li>
+      {% endfor %}
+    {% endif %}
+  {% else %}
+    <h1>You have no permission to view this page</h1>
+  {% endif %}
+{% endblock %}

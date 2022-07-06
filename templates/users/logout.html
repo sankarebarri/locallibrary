@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="col-6">
+  <h4>
+    You're logged out
+    <a href="{% url 'login' %}">Login again</a>
+    <br>
+    or <a href="{% url 'home' %}">Go back Home Page</a>
+  </h4>
+</div>
+{% endblock %}

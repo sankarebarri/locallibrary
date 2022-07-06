@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Borrowed Books</h1>
+  {% for borrowed in bookinstance_list %}
+    <li><a class="{% if borrowed.is_overdue %}text-danger{% endif %}" href="{{ borrowed.book.get_absolute_url }}">
+      {{ borrowed.book.title }}
+    </a>
+    ({{ borrowed.book.author }})
+    {{ borrowed.book.author.date_of_birth }} -
+    {% if borrowed.book.author.date_of_death %}
+      {{ borrowed.book.author.date_of_death }}
+    {% endif %}
+    {% if user.is_staff %}
+      -->borrower: {{ borrowed.borrower}}
+      <a href="{% url 'renew-book' borrowed.id %}">(Renew)</a>
+    {% endif %}
+    </li>
+  {% endfor %}
+{% endblock %}

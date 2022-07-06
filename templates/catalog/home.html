@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+  <h1>Local Library Home</h1>
+  <p>Welcome to the local library home. A Django web application</p>
+
+  <h2>Dynamic Content</h2>
+  <p>The library has the following contents:</p>
+  <ul>
+    <p><strong>Books:</strong> {{ num_books }}</p>
+    <p><strong>Copies:</strong> {{ num_copies }}</p>
+    <p><strong>Copies Available:</strong> {{ num_available }}</p>
+    <p><strong>Authors:</strong> {{ num_authors }}</p>
+  </ul>
+
+  <!-- <p>You have visited this page {{ num_visits }} time{{ num_visits|pluralize }}.</p> -->
+
+{% endblock %}

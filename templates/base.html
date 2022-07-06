@@ -1,0 +1,53 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-4">
+          <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'all-books' %}">All Books</a></li>
+            <li><a href="{% url 'all-authors' %}">All Authors</a></li>
+            <hr>
+            {% if user.is_authenticated %}
+              <p>Hello: <strong>{{user.get_username}}</strong></p>
+              {% if user.is_staff %}
+                <p>Staff</p>
+                <li><a href="{% url 'borrowed-users' %}">Borrowed User</a></li>
+                <li><a href="{% url 'add-book' %}">Add New Book</a></li>
+              {% endif %}
+                <li><a href="{% url 'borrowed-books' %}">Borrowed Books</a></li>
+                <li><a href="{% url 'logout' %}?next={{request.path}}">Logout</a></li>
+            {% else %}
+              <li><a href="{% url 'login' %}?next={{request.path}}">Login</a></li>
+              <li><a href="{% url 'registration' %}?next={{request.path}}">Sign Up</a></li>
+            {% endif %}
+          </ul>
+        </div>
+        <div class="col-8">
+          <div class="mt-5 pt-4">
+            {% if messages %}
+              {% for message in messages %}
+              <div class="alert alert-danger" role="alert">
+                {{ message }}
+              </div>
+              {% endfor %}
+            {% endif %}
+          </div>
+          {% block content %}
+
+          {% endblock %}
+        </div>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+  </body>
+</html>

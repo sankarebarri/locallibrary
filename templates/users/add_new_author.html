@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+{% if perms.catalog.can_mark_returned %}
+  <form method="POST">
+  {% csrf_token %}
+  <h1>Add New Author Here</h1>
+  {{ form|crispy }}
+  <input class="btn btn-primary btn-lg mt-2" type="submit" value="Add Author">
+  </form>
+{% else %}
+  <p>You don't have permission to this page</p>
+{% endif %}
+{% endblock %}
